@@ -6,6 +6,9 @@ const port = 3000;
 const usersRouter = require('./router/users');
 const fruitsRouter = require('./router/fruits');
 
+app.use(express.json()); // for parsing application/json
+app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+
 app.use('/users', usersRouter);
 app.use('/fruits', fruitsRouter);
 
