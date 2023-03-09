@@ -30,4 +30,32 @@ router.get('/:id', (req, res) => {
 	res.status(200).json(users[id - 1]);
 });
 
+router.post('/', (req, res) => {
+	let { name, age } = req.body;
+	if (!name || !age) {
+		res.status(400).json({ message: 'All fields are required' });
+	} else {
+		users.push({
+			name,
+			age,
+		});
+		res.status(200).json(users);
+	}
+});
+
+router.put('/:id', (req, res) => {
+	let { id } = req.params;
+	let { name, age } = req.body;
+	let user = users[id - 1];
+	name && (user.name = name);
+	age && (user.age = age);
+	res.status(201).json(users);
+});
+
+router.delete('/:id', (req, res) => {
+	let { id } = req.params;
+	users.splice(id - 1, 1);
+	res.status(201).json(users);
+});
+
 module.exports = router;
